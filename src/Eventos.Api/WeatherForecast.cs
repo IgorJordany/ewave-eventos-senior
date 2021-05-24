@@ -1,6 +1,6 @@
 using System;
 
-namespace FavoDeMel.Api
+namespace Eventos.Api
 {
     public class WeatherForecast
     {

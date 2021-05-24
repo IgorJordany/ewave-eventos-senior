@@ -38,7 +38,7 @@ namespace Eventos.Application.Commands.Funcionario
                 await _funcionarioRepository.Incluir(funcionario);
 
                 return new InserirFuncionarioResponse { FuncionarioId = funcionario.Id };
-            }   
+            }
         }
     }
 }

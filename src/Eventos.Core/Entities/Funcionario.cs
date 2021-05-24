@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Eventos.Shared.Entities;
 
 namespace Eventos.Core.Entities
@@ -8,6 +9,7 @@ namespace Eventos.Core.Entities
         public string Nome { get; }
         public string Cpf { get; }
         public DateTime DataNascimento { get; }
+        public virtual ICollection<EventoFuncionario> Eventos { get; } = new HashSet<EventoFuncionario>();
 
         public Funcionario(string nome, string cpf, DateTime dataNascimento)
         {

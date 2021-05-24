@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace FavoDeMel.Api
+namespace Eventos.Api
 {
     public class Program
     {
