@@ -20,7 +20,7 @@ namespace Eventos.Api.Controllers.Commands
         }
 
         [HttpPost("inserir")]
-        public async Task<InserirFuncionarioResponse> InserirItem([FromBody] InserirFuncionarioCommand command)
+        public async Task<InserirFuncionarioResponse> InserirFuncionario([FromBody] InserirFuncionarioCommand command)
         {
             var response = await _inserirFuncionarioCommandHandler.Handler(command);
 

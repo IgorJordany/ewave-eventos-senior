@@ -17,10 +17,14 @@ namespace Eventos.Api.Config
 
             //Repositorios
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddScoped<IEventoFuncionarioRepository, EventoFuncionarioRepository>();
+            services.AddScoped<IEventoRepository, EventoRepository>();
 
             //CommandHandlers
             //Funcionario
             services.AddScoped<InserirFuncionarioCommandHandler, InserirFuncionarioCommandHandler>();
+            //Evento
+            services.AddScoped<InserirEventoCommandHandler, InserirEventoCommandHandler>();
 
             //QueryHandlers
             //Funcionario

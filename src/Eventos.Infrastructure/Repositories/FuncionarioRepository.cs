@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Eventos.Core.Entities;
 using Eventos.Core.Repositories;
@@ -16,6 +17,19 @@ namespace Eventos.Infrastructure.Repositories
         {
             _databaseContext = databaseContext;
         }
+
+        public bool ExisteFuncionariosPorIds(List<Guid> ids)
+        {
+            var existe = true;
+
+            foreach (var item in ids)
+            {
+                existe = existe && _databaseContext.Funcionarios.AllAsync(c => c.Id == item).Result;
+            }
+            
+            return existe;
+        }
+
         public async Task Incluir(Funcionario funcionario)
         {
             await _databaseContext.Funcionarios.AddAsync(funcionario);

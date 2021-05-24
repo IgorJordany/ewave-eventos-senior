@@ -10,7 +10,7 @@ namespace Eventos.Core.Entities
         public string Nome { get; }
         public DateTime DataInicio { get; }
         public DateTime DataFim { get; }
-        public ICollection<EventoFuncionario> Organizadores { get; set; } //= new HashSet<EventoFuncionario>();
+        public ICollection<EventoFuncionario> Organizadores { get; set; } = new HashSet<EventoFuncionario>();
 
         public Evento(string nome, DateTime dataInicio, DateTime dataFim)
         {

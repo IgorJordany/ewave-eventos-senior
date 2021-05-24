@@ -9,6 +9,7 @@ namespace Eventos.Core.Repositories
     {
         Task Incluir(Funcionario funcionario);
         Task<List<Funcionario>> ObterListaFuncionarios();
+        bool ExisteFuncionariosPorIds(List<Guid> ids);
         Task<Funcionario> ObterFuncionarioPorId(Guid id);
     }
 }

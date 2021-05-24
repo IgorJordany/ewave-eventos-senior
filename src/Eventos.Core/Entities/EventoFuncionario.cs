@@ -7,9 +7,15 @@ namespace Eventos.Core.Entities
 {
     public class EventoFuncionario : Entity
     {
-        public Guid EventoId { get; set; }
-        public Evento Evento { get; set; }
-        public Guid FuncionarioId { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public Guid EventoId { get; }
+        public Evento Evento { get; }
+        public Guid FuncionarioId { get; }
+        public Funcionario Funcionario { get; }
+
+        public EventoFuncionario(Guid eventoId, Guid funcionarioId)
+        {
+            EventoId = eventoId;
+            FuncionarioId = funcionarioId;
+        }
     }
 }
