@@ -1,4 +1,5 @@
 using Eventos.Application.Commands.Funcionario;
+using Eventos.Application.Queries.Evento;
 using Eventos.Application.Queries.Funcionario;
 using Eventos.Core.Repositories;
 using Eventos.Infrastructure.Abstractions;
@@ -23,12 +24,16 @@ namespace Eventos.Api.Config
             //CommandHandlers
             //Funcionario
             services.AddScoped<InserirFuncionarioCommandHandler, InserirFuncionarioCommandHandler>();
+
             //Evento
             services.AddScoped<InserirEventoCommandHandler, InserirEventoCommandHandler>();
 
             //QueryHandlers
             //Funcionario
             services.AddScoped<ObterFuncionarioHandler, ObterFuncionarioHandler>();
+
+            //Evento
+            services.AddScoped<ObterEventosHandler, ObterEventosHandler>();
 
             services.AddScoped<IUow, Uow>();
 

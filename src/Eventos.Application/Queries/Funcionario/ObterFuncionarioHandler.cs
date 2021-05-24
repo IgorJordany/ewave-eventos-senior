@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Eventos.Application.BaseResponse;
 using Eventos.Application.Queries.Base;
 using Eventos.Core.Repositories;
 
@@ -19,14 +18,11 @@ namespace Eventos.Application.Queries.Funcionario
             var funcionario = await _funcionarioRepository.ObterFuncionarioPorId(request.FuncionarioId);
 
             return new ObterFuncionarioResponse
-            {
-                Funcionario = new FuncionarioResponse
-                {
-                    Id = funcionario.Id,
-                    Nome = funcionario.Nome,
-                    Cpf = funcionario.Cpf,
-                    DataNascimento = funcionario.DataNascimento
-                }
+            { 
+                Id = funcionario.Id,
+                Nome = funcionario.Nome,
+                Cpf = funcionario.Cpf,
+                DataNascimento = funcionario.DataNascimento
             };
         }
     }

@@ -29,7 +29,12 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<List<Evento>> ObterListaEventos()
         {
-            throw new NotImplementedException();
+            var eventos = _databaseContext.Eventos
+                .Include(e => e.Organizadores)
+                .ThenInclude(c=> c.Funcionario)
+                .ToListAsync();
+
+            return eventos;
         }
     }
 }
