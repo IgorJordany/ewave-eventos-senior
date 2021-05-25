@@ -1,6 +1,5 @@
 ﻿using Eventos.Core.Entities;
 using Eventos.Infrastructure.Data.Mapping;
-using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventos.Infrastructure.Data
@@ -18,8 +17,6 @@ namespace Eventos.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Ignore<Notification>();
-
             new FuncionarioMaping(modelBuilder.Entity<Funcionario>());
             new EventoMaping(modelBuilder.Entity<Evento>());
             new EventoFuncionarioMaping(modelBuilder.Entity<EventoFuncionario>());

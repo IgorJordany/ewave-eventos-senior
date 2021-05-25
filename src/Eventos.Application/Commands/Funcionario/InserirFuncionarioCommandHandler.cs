@@ -19,26 +19,14 @@ namespace Eventos.Application.Commands.Funcionario
         {
             var cpf = new CPF(command.Cpf);
 
-            if (cpf.Notifications.Any())
-            {
-                return new InserirFuncionarioResponse { Erro = cpf.Notifications };
-            }
-
             var funcionario = new Core.Entities.Funcionario(
                 command.Nome,
                 cpf.Cpf,
                 command.DataNascimento);
 
-            if (funcionario.Notifications.Any())
-            {
-                return new InserirFuncionarioResponse { Erro = funcionario.Notifications };
-            }
-            else
-            {
-                await _funcionarioRepository.Incluir(funcionario);
+            await _funcionarioRepository.Incluir(funcionario);
 
-                return new InserirFuncionarioResponse { FuncionarioId = funcionario.Id };
-            }
+            return new InserirFuncionarioResponse { FuncionarioId = funcionario.Id };
         }
     }
 }

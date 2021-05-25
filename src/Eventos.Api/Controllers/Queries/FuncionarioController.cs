@@ -10,17 +10,27 @@ namespace Eventos.Api.Controllers.Queries
     public class FuncionarioController : ControllerBase
     {
         private readonly ObterFuncionarioHandler _obterFuncionarioHandler;
+        private readonly ObterFuncionariosHandler _obterFuncionariosHandler;
 
         public FuncionarioController(
-            ObterFuncionarioHandler obterFuncionarioHandler)
+            ObterFuncionarioHandler obterFuncionarioHandler,
+            ObterFuncionariosHandler obterFuncionariosHandler)
         {
             _obterFuncionarioHandler = obterFuncionarioHandler;
+            _obterFuncionariosHandler = obterFuncionariosHandler;
         }
 
         [HttpGet("{funcionarioId}")]
         public async Task<ObterFuncionarioResponse> ObterFuncionario([FromRoute] Guid funcionarioId)
         {
             var response = await _obterFuncionarioHandler.Handle(new ObterFuncionarioRequest { FuncionarioId = funcionarioId });
+            return response;
+        }
+
+        [HttpGet("")]
+        public async Task<ObterFuncionariosResponse> ObterFuncionarios([FromRoute] Guid funcionarioId)
+        {
+            var response = await _obterFuncionariosHandler.Handle(new ObterFuncionariosRequest());
             return response;
         }
     }

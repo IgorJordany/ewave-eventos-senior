@@ -1,11 +1,10 @@
-﻿using Flunt.Notifications;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Eventos.Shared.Utilities
 {
-    public class CPF: Notifiable
+    public class CPF
     {
         public string Cpf { get; }
 
@@ -17,7 +16,7 @@ namespace Eventos.Shared.Utilities
             }
             else
             {
-                AddNotification(nameof(cpf), "Não é um CPF valido");
+                throw new Exception("Não é um CPF valido");
             }
         }
 

@@ -31,6 +31,7 @@ namespace Eventos.Api.Config
             //QueryHandlers
             //Funcionario
             services.AddScoped<ObterFuncionarioHandler, ObterFuncionarioHandler>();
+            services.AddScoped<ObterFuncionariosHandler, ObterFuncionariosHandler>();
 
             //Evento
             services.AddScoped<ObterEventosHandler, ObterEventosHandler>();

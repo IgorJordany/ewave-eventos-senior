@@ -1,9 +1,8 @@
 using System;
-using Flunt.Notifications;
 
 namespace Eventos.Shared.Entities
 {
-    public class Entity : Notifiable
+    public class Entity
     {
         public Entity()
         {

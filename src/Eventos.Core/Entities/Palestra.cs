@@ -7,7 +7,7 @@ namespace Eventos.Core.Entities
 {
     public class Palestra : Entity
     {
-        public CategoriaPalestra Categoria { get; }
+        public Guid CategoriaId { get; }
         public string Tema { get; }
         public string Local { get; }
         public DateTime DataInicio { get; }
@@ -15,7 +15,7 @@ namespace Eventos.Core.Entities
         public Funcionario Palestrante { get; }
         public ICollection<Participante> Participantes { get; } = new HashSet<Participante>();
 
-        public Palestra(CategoriaPalestra categoria,
+        public Palestra(Guid categoriaId,
             string tema,
             string local,
             DateTime dataInicio,
@@ -23,7 +23,7 @@ namespace Eventos.Core.Entities
             Funcionario palestrante,
             ICollection<Participante> participantes)
         {
-            Categoria = categoria;
+            CategoriaId = categoriaId;
             Tema = tema;
             Local = local;
             DataInicio = dataInicio;

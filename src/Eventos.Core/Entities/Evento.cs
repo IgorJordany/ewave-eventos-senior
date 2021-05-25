@@ -16,7 +16,7 @@ namespace Eventos.Core.Entities
         {
             if (!IsDataValida(dataInicio, dataFim))
             {
-                AddNotification(nameof(dataInicio), "DataInicio está maior ou igual DataFim");
+                throw new Exception("DataInicio está maior ou igual DataFim");
             }
             else
             {
