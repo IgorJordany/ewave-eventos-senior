@@ -4,7 +4,9 @@ using Eventos.Application.Queries.Base;
 
 namespace Eventos.Application.Queries.Evento
 {
-    public class ObterEventosRequest : IRequest<ObterEventosResponse>
+    public class ObterEventoRequest : IRequest<ObterEventoResponse>
     {
+        [Required]
+        public Guid EventoId { get; set; }
     }
 }

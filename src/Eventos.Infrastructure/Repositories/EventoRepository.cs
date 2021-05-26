@@ -24,7 +24,10 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<Evento> ObterEventoPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _databaseContext.Eventos
+                .Include(e => e.Organizadores)
+                .ThenInclude(c => c.Funcionario)
+                .SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public Task<List<Evento>> ObterListaEventos()
