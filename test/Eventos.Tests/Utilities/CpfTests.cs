@@ -22,8 +22,6 @@ namespace Eventos.WebApi.Tests.Utilities
 
             using (new AssertionScope())
             {
-                cpfValidado.Notifications.Any().Should().BeFalse();
-
                 cpfValidado.Cpf.Should().NotBeNullOrEmpty();
             }
         }
@@ -38,11 +36,11 @@ namespace Eventos.WebApi.Tests.Utilities
         [InlineData("fajklhfkewqefçwemf")]
         public void Deve_negar_cpfs_invalidos(string cpf)
         {
-            var cpfValidado = new CPF(cpf);
+            Action act = () => new CPF(cpf);
 
             using (new AssertionScope())
             {
-                cpfValidado.Notifications.Any().Should().BeTrue();
+                act.Should().Throw<Exception>();
             }
         }
     }

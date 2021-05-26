@@ -35,6 +35,7 @@ namespace Eventos.Api.Config
 
             //Evento
             services.AddScoped<ObterEventosHandler, ObterEventosHandler>();
+            services.AddScoped<ObterEventoHandler, ObterEventoHandler>();
 
             services.AddScoped<IUow, Uow>();
 

@@ -1,7 +1,6 @@
 ﻿using Eventos.Shared.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Eventos.Core.Entities
 {
@@ -12,7 +11,7 @@ namespace Eventos.Core.Entities
         public string Local { get; }
         public DateTime DataInicio { get; }
         public float Duracao { get; }
-        public Funcionario Palestrante { get; }
+        public Guid PalestranteId { get; }
         public ICollection<Participante> Participantes { get; } = new HashSet<Participante>();
 
         public Palestra(Guid categoriaId,
@@ -20,16 +19,19 @@ namespace Eventos.Core.Entities
             string local,
             DateTime dataInicio,
             float duracao,
-            Funcionario palestrante,
-            ICollection<Participante> participantes)
+            Guid palestranteId)
         {
             CategoriaId = categoriaId;
             Tema = tema;
             Local = local;
             DataInicio = dataInicio;
             Duracao = duracao;
-            Palestrante = palestrante;
-            Participantes = participantes;
+            PalestranteId = palestranteId;
+        }
+
+        public void AdicionarParticipantes(ICollection<Participante> participantes)
+        {
+
         }
     }
 }

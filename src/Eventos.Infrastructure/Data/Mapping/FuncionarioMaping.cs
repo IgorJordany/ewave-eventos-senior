@@ -24,6 +24,11 @@ namespace Eventos.Infrastructure.Data.Mapping
             builder.Property(c => c.Cpf)
                 .HasColumnName("Cpf")
                 .IsRequired();
+
+            builder
+                .HasMany(i => i.Palestrantes)
+                .WithOne()
+                .HasForeignKey(p => p.PalestranteId);
         }
     }
 }

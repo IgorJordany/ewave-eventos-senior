@@ -19,6 +19,11 @@ namespace Eventos.Infrastructure.Data.Mapping
                 .HasColumnName("Nome")
                 .HasColumnType("varchar(50)")
                 .IsRequired();
+
+            builder
+                .HasMany(i => i.Palestras)
+                .WithOne()
+                .HasForeignKey(p => p.CategoriaId);
         }
     }
 }

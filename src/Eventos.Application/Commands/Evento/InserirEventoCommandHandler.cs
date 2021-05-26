@@ -42,7 +42,7 @@ namespace Eventos.Application.Commands.Funcionario
                 organizadores.Add(eventoFuncionario);
             }
 
-            evento.Organizadores = organizadores;
+            evento.AdicionarOrganizadores(organizadores);
 
             await _eventoRepository.Incluir(evento);
 

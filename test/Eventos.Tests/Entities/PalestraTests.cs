@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Eventos.WebApi.Tests.Entities
 {
-    public class EventoTests
+    public class PalestraTests
     {
         private Funcionario FuncionarioGenerator()
         {

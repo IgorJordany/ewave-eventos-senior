@@ -33,6 +33,10 @@ namespace Eventos.Infrastructure.Data.Mapping
             builder.Property(c => c.Duracao)
                 .HasColumnName("Duracao")
                 .IsRequired();
+
+            builder.Property(c => c.PalestranteId)
+               .HasColumnName("PalestranteId")
+               .IsRequired();
         }
     }
 }

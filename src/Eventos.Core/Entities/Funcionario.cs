@@ -11,6 +11,7 @@ namespace Eventos.Core.Entities
         public DateTime DataNascimento { get; }
         public virtual ICollection<EventoFuncionario> Eventos { get; } = new HashSet<EventoFuncionario>();
         public virtual ICollection<Participante> Participantes { get; } = new HashSet<Participante>();
+        public virtual ICollection<Palestra> Palestrantes { get; } = new HashSet<Palestra>();
 
         public Funcionario(string nome, string cpf, DateTime dataNascimento)
         {

@@ -10,7 +10,7 @@ namespace Eventos.Core.Entities
         public string Nome { get; }
         public DateTime DataInicio { get; }
         public DateTime DataFim { get; }
-        public ICollection<EventoFuncionario> Organizadores { get; set; } = new HashSet<EventoFuncionario>();
+        public ICollection<EventoFuncionario> Organizadores { get; } = new HashSet<EventoFuncionario>();
 
         public Evento(string nome, DateTime dataInicio, DateTime dataFim)
         {
@@ -23,6 +23,14 @@ namespace Eventos.Core.Entities
                 Nome = nome;
                 DataInicio = dataInicio;
                 DataFim = dataFim;
+            }
+        }
+
+        public void AdicionarOrganizadores(ICollection<EventoFuncionario> organizadores)
+        {
+            foreach (var item in organizadores)
+            {
+                Organizadores.Add(item);
             }
         }
 
