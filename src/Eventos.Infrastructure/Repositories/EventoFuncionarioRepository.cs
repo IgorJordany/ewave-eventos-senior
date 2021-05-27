@@ -24,12 +24,12 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<EventoFuncionario> ObterEventoFuncionarioPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _databaseContext.EventoFuncionarios.SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public Task<List<EventoFuncionario>> ObterListaEventoFuncionarios()
         {
-            throw new NotImplementedException();
+            return _databaseContext.EventoFuncionarios.ToListAsync();
         }
     }
 }

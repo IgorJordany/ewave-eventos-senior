@@ -32,7 +32,7 @@ namespace Eventos.Application.Commands.Evento
                 throw new System.Exception(nameof(command.Organizadores) + " Funcionario não existente");
             }
 
-            var evento = new Evento(command.Nome, command.DataInicio, command.DataFim);
+            var evento = new Core.Entities.Evento(command.Nome, command.DataInicio, command.DataFim);
 
             var organizadores = new HashSet<EventoFuncionario>(); ;
 

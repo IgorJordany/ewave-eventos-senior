@@ -10,44 +10,64 @@ namespace Eventos.Application.Commands.Palestra
 {
     public class InserirPalestraCommandHandler : ICommandHandler<InserirPalestraCommand, InserirPalestraResponse>
     {
-        private readonly IEventoRepository _eventoRepository;
+        private readonly IPalestraRepository _palestraRepository;
+        private readonly ICategoriaPalestraRepository _categoriaPalestraRepository;
         private readonly IFuncionarioRepository _funcionarioRepository;
-        private readonly IEventoFuncionarioRepository _eventoFuncionarioRepository;
 
         public InserirPalestraCommandHandler(
-            IEventoRepository eventoRepository,
-            IFuncionarioRepository funcionarioRepository,
-            IEventoFuncionarioRepository eventoFuncionarioRepository)
+            IPalestraRepository palestraRepository,
+            ICategoriaPalestraRepository categoriaPalestraRepository,
+            IFuncionarioRepository funcionarioRepository)
         {
-            _eventoRepository = eventoRepository;
+            _palestraRepository = palestraRepository;
+            _categoriaPalestraRepository = categoriaPalestraRepository;
             _funcionarioRepository = funcionarioRepository;
-            _eventoFuncionarioRepository = eventoFuncionarioRepository;
         }
 
         public async Task<InserirPalestraResponse> Handler(InserirPalestraCommand command)
         {
-            var funcionariosValidos = _funcionarioRepository.ExisteFuncionariosPorIds(command.Organizadores.Select(f => f.FuncionarioId).ToList());
+            var categoriaValida = _categoriaPalestraRepository.ExisteCategoriaPalestraPorId(command.CategoriaId);
 
-            if (!funcionariosValidos)
+            if (!categoriaValida.Result)
             {
-                throw new System.Exception(nameof(command.Organizadores) + " Funcionario não existente");
+                throw new System.Exception(nameof(command.CategoriaId) + " Categoria Palestra não existente");
             }
 
-            var evento = new Evento(command.Nome, command.DataInicio, command.DataFim);
+            var palestranteValido = _funcionarioRepository.ExisteFuncionarioPorId(command.PalestranteId);
 
-            var organizadores = new HashSet<EventoFuncionario>(); ;
-
-            foreach (var item in command.Organizadores)
+            if (!palestranteValido.Result)
             {
-                var eventoFuncionario = new EventoFuncionario(evento.Id, item.FuncionarioId);
-                organizadores.Add(eventoFuncionario);
+                throw new System.Exception(nameof(command.PalestranteId) + " Palestrante não existente");
             }
 
-            evento.AdicionarOrganizadores(organizadores);
+            var participantesValidos = _funcionarioRepository.ExisteFuncionariosPorIds(command.Participadores.Select(f => f.FuncionarioId).ToList());
 
-            await _eventoRepository.Incluir(evento);
+            if (!participantesValidos)
+            {
+                throw new System.Exception(nameof(command.Participadores) + " Participantes não existente");
+            }
 
-            return new InserirEventoResponse { EventoId = evento.Id };
+            var palestra = new Core.Entities.Palestra(
+                command.CategoriaId,
+                command.Tema,
+                command.Local,
+                command.DataInicio,
+                command.Duracao,
+                command.PalestranteId);
+
+            var participantes = new HashSet<Participante>(); ;
+
+            foreach (var item in command.Participadores)
+            {
+                var participante = new Participante(palestra.Id, item.FuncionarioId, false);
+                participantes.Add(participante);
+            }
+
+            palestra.AdicionarParticipantes(participantes);
+
+            await _palestraRepository.Incluir(palestra);
+
+            return new InserirPalestraResponse { PalestraId = palestra.Id };
         }
     }
 }

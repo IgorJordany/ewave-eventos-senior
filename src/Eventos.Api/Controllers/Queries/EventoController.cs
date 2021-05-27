@@ -1,9 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Eventos.Application.Commands.Funcionario;
 using Eventos.Application.Queries.Evento;
-using Eventos.Application.Queries.Funcionario;
-using Eventos.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eventos.Api.Controllers.Queries

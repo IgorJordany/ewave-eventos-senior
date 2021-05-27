@@ -32,12 +32,10 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<List<Evento>> ObterListaEventos()
         {
-            var eventos = _databaseContext.Eventos
+            return _databaseContext.Eventos
                 .Include(e => e.Organizadores)
                 .ThenInclude(c=> c.Funcionario)
                 .ToListAsync();
-
-            return eventos;
         }
     }
 }

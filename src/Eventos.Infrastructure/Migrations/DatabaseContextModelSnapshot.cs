@@ -19,6 +19,22 @@ namespace Eventos.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Eventos.Core.Entities.CategoriaPalestra", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnName("Nome")
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriaPalestra");
+                });
+
             modelBuilder.Entity("Eventos.Core.Entities.Evento", b =>
                 {
                     b.Property<Guid>("Id")
@@ -123,6 +139,8 @@ namespace Eventos.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoriaId");
+
                     b.HasIndex("PalestranteId");
 
                     b.ToTable("Palestra");
@@ -170,6 +188,12 @@ namespace Eventos.Infrastructure.Migrations
 
             modelBuilder.Entity("Eventos.Core.Entities.Palestra", b =>
                 {
+                    b.HasOne("Eventos.Core.Entities.CategoriaPalestra", null)
+                        .WithMany("Palestras")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Eventos.Core.Entities.Funcionario", null)
                         .WithMany("Palestrantes")
                         .HasForeignKey("PalestranteId")
@@ -182,13 +206,13 @@ namespace Eventos.Infrastructure.Migrations
                     b.HasOne("Eventos.Core.Entities.Funcionario", "Funcionario")
                         .WithMany("Participantes")
                         .HasForeignKey("FuncionarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Eventos.Core.Entities.Palestra", "Palestra")
                         .WithMany("Participantes")
                         .HasForeignKey("PalestraId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -24,12 +24,18 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<List<Palestra>> ObterListaPalestras()
         {
-            throw new NotImplementedException();
+            return _databaseContext.Palestras
+                .Include(e => e.Participantes)
+                .ThenInclude(c => c.Funcionario)
+                .ToListAsync();
         }
 
         public Task<Palestra> ObterPalestraPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _databaseContext.Palestras
+                .Include(e => e.Participantes)
+                .ThenInclude(c => c.Funcionario)
+                .SingleOrDefaultAsync(c => c.Id == id);
         }
     }
 }

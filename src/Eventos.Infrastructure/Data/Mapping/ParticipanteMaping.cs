@@ -15,12 +15,14 @@ namespace Eventos.Infrastructure.Data.Mapping
             builder
                 .HasOne(ef => ef.Palestra)
                 .WithMany(e => e.Participantes)
-                .HasForeignKey(ef => ef.PalestraId);
+                .HasForeignKey(ef => ef.PalestraId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder
                 .HasOne(ef => ef.Funcionario)
                 .WithMany(e => e.Participantes)
-                .HasForeignKey(ef => ef.FuncionarioId);
+                .HasForeignKey(ef => ef.FuncionarioId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(c => c.Confirmou)
                .HasColumnName("Confirmou")

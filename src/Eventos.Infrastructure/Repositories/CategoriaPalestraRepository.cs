@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Eventos.Core.Entities;
 using Eventos.Core.Repositories;
 using Eventos.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eventos.Infrastructure.Repositories
 {
@@ -14,6 +15,11 @@ namespace Eventos.Infrastructure.Repositories
         public CategoriaPalestraRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
+        }
+
+        public async Task<bool> ExisteCategoriaPalestraPorId(Guid id)
+        {
+            return await _databaseContext.CategoriaPalestras.AnyAsync(c => c.Id == id);
         }
 
         public async Task Incluir(CategoriaPalestra categoriaPalestra)
@@ -28,7 +34,7 @@ namespace Eventos.Infrastructure.Repositories
 
         public Task<List<CategoriaPalestra>> ObterListaCategoriaPalestras()
         {
-            throw new NotImplementedException();
+            return _databaseContext.CategoriaPalestras.ToListAsync();
         }
     }
 }

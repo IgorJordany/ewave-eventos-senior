@@ -18,13 +18,18 @@ namespace Eventos.Infrastructure.Repositories
             _databaseContext = databaseContext;
         }
 
+        public async Task<bool> ExisteFuncionarioPorId(Guid id)
+        {
+            return await _databaseContext.Funcionarios.AnyAsync(f => f.Id == id);
+        }
+
         public bool ExisteFuncionariosPorIds(List<Guid> ids)
         {
             var existe = true;
 
             foreach (var item in ids)
             {
-                existe = existe && _databaseContext.Funcionarios.AllAsync(c => c.Id == item).Result;
+                existe = existe && _databaseContext.Funcionarios.AnyAsync(c => c.Id == item).Result;
             }
             
             return existe;

@@ -10,5 +10,6 @@ namespace Eventos.Core.Repositories
         Task Incluir(CategoriaPalestra categoriaPalestra);
         Task<List<CategoriaPalestra>> ObterListaCategoriaPalestras();
         Task<CategoriaPalestra> ObterCategoriaPalestraPorId(Guid id);
+        Task<bool> ExisteCategoriaPalestraPorId(Guid id);
     }
 }
