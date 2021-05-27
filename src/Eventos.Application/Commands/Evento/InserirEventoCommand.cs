@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Eventos.Application.Commands.Base;
 
-namespace Eventos.Application.Commands.Funcionario
+namespace Eventos.Application.Commands.Evento
 {
     public class InserirEventoCommand : ICommand<InserirEventoResponse>
     {

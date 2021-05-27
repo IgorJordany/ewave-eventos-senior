@@ -1,4 +1,6 @@
+using Eventos.Application.Commands.Evento;
 using Eventos.Application.Commands.Funcionario;
+using Eventos.Application.Commands.Palestra;
 using Eventos.Application.Queries.Evento;
 using Eventos.Application.Queries.Funcionario;
 using Eventos.Core.Repositories;

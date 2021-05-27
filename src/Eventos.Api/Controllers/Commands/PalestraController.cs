@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace Eventos.Api.Controllers.Commands
 {
     [ApiController]
-    [Route("commands/evento")]
-    public class EventoController : ControllerBase
+    [Route("commands/palestra")]
+    public class PalestraController : ControllerBase
     {
         private readonly InserirEventoCommandHandler _inserirEventoCommandHandler;
         private readonly IUow _uow;
 
-        public EventoController(InserirEventoCommandHandler inserirEventoCommandHandler,
+        public PalestraController(InserirEventoCommandHandler inserirEventoCommandHandler,
             IUow uow)
         {
             _inserirEventoCommandHandler = inserirEventoCommandHandler;

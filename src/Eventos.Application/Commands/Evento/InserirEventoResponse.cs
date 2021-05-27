@@ -1,11 +1,10 @@
 using System;
 using Eventos.Application.Commands.Base;
 
-namespace Eventos.Application.Commands.Funcionario
+namespace Eventos.Application.Commands.Evento
 {
-    public class InserirEventoResponse : ICommandResponse
+    public class InserirEventoResponse
     {
-        public object Erro { get; set; }
         public Guid EventoId { get; set; }
     }
 }

@@ -20,17 +20,44 @@ namespace Eventos.WebApi.Tests.Entities
             return new Funcionario("João", cpfValido.Cpf, nascimento);
         }
 
-        [Theory]
-        [InlineData("Jabuticaba")]
-        [InlineData("Abacaxi")]
-        [InlineData("Melao")]
-        public void Nao_deve_criar_evento_com_data_fim_menor_ou_igual_data_inicio(string nome)
+        [Fact]
+        public void Deve_criar_palestra_com_sucesso()
         {
-            var organizadores = new List<Funcionario> { FuncionarioGenerator(), FuncionarioGenerator()};
-            var dataFim = DateTime.Now;
-            var dataInicio = dataFim.AddDays(1);
+            var categoria = new CategoriaPalestra("Análise de Sistemas");
+            var palestrante = FuncionarioGenerator();
+            var dataInicio = DateTime.Now.AddDays(1);
 
-            Action act = () => new Evento(nome, dataInicio, dataFim);
+            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id);
+
+            using (new AssertionScope())
+            {
+                palestra.CategoriaId.Should().Be(categoria.Id);
+                palestra.PalestranteId.Should().Be(palestrante.Id);
+                palestra.DataInicio.Should().Be(dataInicio);
+            }
+        }
+
+        [Theory]
+        [InlineData(40)]
+        [InlineData(32)]
+        [InlineData(21)]
+        [InlineData(35)]
+        public void Nao_deve_Adicionar_mais_de_vinte_participantes(int quantParticipantes)
+        {
+            var categoria = new CategoriaPalestra("Análise de Sistemas");
+            var palestrante = FuncionarioGenerator();
+            var dataInicio = DateTime.Now.AddDays(1);
+            var participantes = new HashSet<Participante>();
+
+            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id);
+
+            for (int i = 0; i < quantParticipantes; i++)
+            {
+                var part = FuncionarioGenerator();
+                participantes.Add(new Participante(palestra.Id, part.Id, false));
+            }
+
+            Action act = () => palestra.AdicionarParticipantes(participantes);
 
             using (new AssertionScope())
             {

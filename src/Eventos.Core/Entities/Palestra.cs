@@ -31,7 +31,15 @@ namespace Eventos.Core.Entities
 
         public void AdicionarParticipantes(ICollection<Participante> participantes)
         {
+            if (20 - Participantes.Count < participantes.Count)
+            {
+                throw new Exception("Não pode inserir mais de vinte participantes");
+            }
 
+            foreach (var item in participantes)
+            {
+                Participantes.Add(item);
+            }
         }
     }
 }

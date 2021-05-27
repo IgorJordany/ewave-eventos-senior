@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Eventos.Application.Commands.Base;
+using Eventos.Application.Commands.Funcionario;
 using Eventos.Core.Entities;
 using Eventos.Core.Repositories;
 
-namespace Eventos.Application.Commands.Evento
+namespace Eventos.Application.Commands.Palestra
 {
-    public class InserirEventoCommandHandler : ICommandHandler<InserirEventoCommand, InserirEventoResponse>
+    public class InserirPalestraCommandHandler : ICommandHandler<InserirPalestraCommand, InserirPalestraResponse>
     {
         private readonly IEventoRepository _eventoRepository;
         private readonly IFuncionarioRepository _funcionarioRepository;
         private readonly IEventoFuncionarioRepository _eventoFuncionarioRepository;
 
-        public InserirEventoCommandHandler(
+        public InserirPalestraCommandHandler(
             IEventoRepository eventoRepository,
             IFuncionarioRepository funcionarioRepository,
             IEventoFuncionarioRepository eventoFuncionarioRepository)
@@ -23,7 +24,7 @@ namespace Eventos.Application.Commands.Evento
             _eventoFuncionarioRepository = eventoFuncionarioRepository;
         }
 
-        public async Task<InserirEventoResponse> Handler(InserirEventoCommand command)
+        public async Task<InserirPalestraResponse> Handler(InserirPalestraCommand command)
         {
             var funcionariosValidos = _funcionarioRepository.ExisteFuncionariosPorIds(command.Organizadores.Select(f => f.FuncionarioId).ToList());
 

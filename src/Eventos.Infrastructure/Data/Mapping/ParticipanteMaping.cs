@@ -21,6 +21,10 @@ namespace Eventos.Infrastructure.Data.Mapping
                 .HasOne(ef => ef.Funcionario)
                 .WithMany(e => e.Participantes)
                 .HasForeignKey(ef => ef.FuncionarioId);
+
+            builder.Property(c => c.Confirmou)
+               .HasColumnName("Confirmou")
+               .IsRequired();
         }
     }
 }
