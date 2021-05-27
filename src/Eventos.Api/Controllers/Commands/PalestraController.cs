@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Eventos.Application.Commands.Evento;
 using Eventos.Application.Commands.Palestra;
 using Eventos.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Mvc;
@@ -10,20 +9,20 @@ namespace Eventos.Api.Controllers.Commands
     [Route("commands/palestra")]
     public class PalestraController : ControllerBase
     {
-        private readonly InserirEventoCommandHandler _inserirEventoCommandHandler;
+        private readonly InserirPalestraCommandHandler _inserirPalestraCommandHandler;
         private readonly IUow _uow;
 
-        public PalestraController(InserirEventoCommandHandler inserirEventoCommandHandler,
+        public PalestraController(InserirPalestraCommandHandler inserirPalestraCommandHandler,
             IUow uow)
         {
-            _inserirEventoCommandHandler = inserirEventoCommandHandler;
+            _inserirPalestraCommandHandler = inserirPalestraCommandHandler;
             _uow = uow;
         }
 
         [HttpPost("inserir")]
-        public async Task<InserirEventoResponse> InserirEvento([FromBody] InserirEventoCommand command)
+        public async Task<InserirPalestraResponse> InserirPalestra([FromBody] InserirPalestraCommand command)
         {
-            var response = await _inserirEventoCommandHandler.Handler(command);
+            var response = await _inserirPalestraCommandHandler.Handler(command);
 
             _uow.Commit();
 

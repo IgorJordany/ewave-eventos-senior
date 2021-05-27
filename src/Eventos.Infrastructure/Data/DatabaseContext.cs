@@ -15,6 +15,7 @@ namespace Eventos.Infrastructure.Data
         public DbSet<EventoFuncionario> EventoFuncionarios { get; set; }
         public DbSet<Palestra> Palestras { get; set; }
         public DbSet<Participante> Participantes { get; set; }
+        public DbSet<CategoriaPalestra> CategoriaPalestras { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,6 +25,7 @@ namespace Eventos.Infrastructure.Data
             new EventoFuncionarioMaping(modelBuilder.Entity<EventoFuncionario>());
             new PalestraMaping(modelBuilder.Entity<Palestra>());
             new ParticipanteMaping(modelBuilder.Entity<Participante>());
+            new CategoriaPalestraMaping(modelBuilder.Entity<CategoriaPalestra>());
         }
     }
 }

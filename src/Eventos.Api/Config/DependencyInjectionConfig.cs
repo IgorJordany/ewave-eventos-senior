@@ -1,3 +1,4 @@
+using Eventos.Application.Commands.CategoriaPalestra;
 using Eventos.Application.Commands.Evento;
 using Eventos.Application.Commands.Funcionario;
 using Eventos.Application.Commands.Palestra;
@@ -22,6 +23,8 @@ namespace Eventos.Api.Config
             services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
             services.AddScoped<IEventoFuncionarioRepository, EventoFuncionarioRepository>();
             services.AddScoped<IEventoRepository, EventoRepository>();
+            services.AddScoped<ICategoriaPalestraRepository, CategoriaPalestraRepository>();
+            services.AddScoped<IPalestraRepository, PalestraRepository>();
 
             //CommandHandlers
             //Funcionario
@@ -29,6 +32,13 @@ namespace Eventos.Api.Config
 
             //Evento
             services.AddScoped<InserirEventoCommandHandler, InserirEventoCommandHandler>();
+
+            //CategoriaPalestra
+            services.AddScoped<InserirCategoriaPalestraCommandHandler, InserirCategoriaPalestraCommandHandler>();
+
+            //Palestra
+            services.AddScoped<InserirPalestraCommandHandler, InserirPalestraCommandHandler>();
+
 
             //QueryHandlers
             //Funcionario
