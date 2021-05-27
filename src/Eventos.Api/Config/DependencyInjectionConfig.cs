@@ -2,6 +2,7 @@ using Eventos.Application.Commands.CategoriaPalestra;
 using Eventos.Application.Commands.Evento;
 using Eventos.Application.Commands.Funcionario;
 using Eventos.Application.Commands.Palestra;
+using Eventos.Application.Queries.CategoriaPalestra;
 using Eventos.Application.Queries.Evento;
 using Eventos.Application.Queries.Funcionario;
 using Eventos.Core.Repositories;
@@ -43,11 +44,14 @@ namespace Eventos.Api.Config
             //QueryHandlers
             //Funcionario
             services.AddScoped<ObterFuncionarioHandler, ObterFuncionarioHandler>();
-            services.AddScoped<ObterFuncionariosHandler, ObterFuncionariosHandler>();
+            services.AddScoped<ObterCategoriaPalestrasHandler, ObterCategoriaPalestrasHandler>();
 
             //Evento
             services.AddScoped<ObterEventosHandler, ObterEventosHandler>();
             services.AddScoped<ObterEventoHandler, ObterEventoHandler>();
+
+            //CategoriaPalestra
+            services.AddScoped<ObterCategoriaPalestrasHandler, ObterCategoriaPalestrasHandler>();
 
             services.AddScoped<IUow, Uow>();
 
