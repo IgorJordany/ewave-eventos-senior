@@ -1,6 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using Eventos.Application.Commands.Palestra;
+using Eventos.Core.Repositories;
 using Eventos.Infrastructure.Abstractions;
+using Eventos.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Eventos.Api.Controllers.Commands

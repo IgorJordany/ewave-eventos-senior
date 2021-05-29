@@ -25,6 +25,10 @@ namespace Eventos.Infrastructure.Data.Mapping
                 .HasColumnName("Cpf")
                 .IsRequired();
 
+            builder.Property(c => c.Email)
+                .HasColumnName("Email")
+                .IsRequired();
+
             builder
                 .HasMany(i => i.Palestrantes)
                 .WithOne()

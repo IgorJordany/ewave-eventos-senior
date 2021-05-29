@@ -5,6 +5,7 @@ using Eventos.Application.Commands.Base;
 using Eventos.Application.Commands.Funcionario;
 using Eventos.Core.Entities;
 using Eventos.Core.Repositories;
+using Eventos.Infrastructure.Interfaces;
 
 namespace Eventos.Application.Commands.Palestra
 {
@@ -13,15 +14,18 @@ namespace Eventos.Application.Commands.Palestra
         private readonly IPalestraRepository _palestraRepository;
         private readonly ICategoriaPalestraRepository _categoriaPalestraRepository;
         private readonly IFuncionarioRepository _funcionarioRepository;
+        private readonly ICentralEmailService _centralEmailService;
 
         public InserirPalestraCommandHandler(
             IPalestraRepository palestraRepository,
             ICategoriaPalestraRepository categoriaPalestraRepository,
-            IFuncionarioRepository funcionarioRepository)
+            IFuncionarioRepository funcionarioRepository,
+            ICentralEmailService centralEmailService)
         {
             _palestraRepository = palestraRepository;
             _categoriaPalestraRepository = categoriaPalestraRepository;
             _funcionarioRepository = funcionarioRepository;
+            _centralEmailService = centralEmailService;
         }
 
         public async Task<InserirPalestraResponse> Handler(InserirPalestraCommand command)
@@ -55,17 +59,19 @@ namespace Eventos.Application.Commands.Palestra
                 command.Duracao,
                 command.PalestranteId);
 
-            var participantes = new HashSet<Participante>(); ;
+            var participantes = new HashSet<Core.Entities.Participante>(); ;
 
             foreach (var item in command.Participadores)
             {
-                var participante = new Participante(palestra.Id, item.FuncionarioId, false);
+                var participante = new Core.Entities.Participante(palestra.Id, item.FuncionarioId, false);
                 participantes.Add(participante);
             }
 
             palestra.AdicionarParticipantes(participantes);
 
             await _palestraRepository.Incluir(palestra);
+
+            _centralEmailService.EnviarEmailsLocalPalestra(palestra);
 
             return new InserirPalestraResponse { PalestraId = palestra.Id };
         }

@@ -10,12 +10,13 @@ namespace Eventos.Application.Queries.Palestra
 
     public class Palestra
     {
+        public Guid Id { get; set; }
         public Guid CategoriaId { get; set; }
         public string Tema { get; set; }
         public string Local { get; set; }
         public DateTime DataInicio { get; set; }
         public float Duracao { get; set; }
         public Guid PalestranteId { get; set; }
-        public List<ParticipadoresDto> Participadores { get; set; }
+        public List<ParticipantesResponseDto> Participadores { get; set; }
     }
 }

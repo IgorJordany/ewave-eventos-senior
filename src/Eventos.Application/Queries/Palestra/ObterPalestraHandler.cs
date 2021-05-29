@@ -20,14 +20,16 @@ namespace Eventos.Application.Queries.Palestra
 
             return new ObterPalestraResponse
             {
+                Id = palestra.Id,
                 CategoriaId = palestra.CategoriaId,
                 Tema = palestra.Tema,
                 Local = palestra.Local,
                 DataInicio = palestra.DataInicio,
                 Duracao = palestra.Duracao,
                 PalestranteId = palestra.PalestranteId,
-                Participadores = palestra.Participantes.Select(p => new ParticipadoresDto
+                Participadores = palestra.Participantes.Select(p => new ParticipantesResponseDto
                 {
+                    ParticipanteId = p.Id,
                     FuncionarioId = p.FuncionarioId,
                     Confirmou = p.Confirmou
                 }).ToList()

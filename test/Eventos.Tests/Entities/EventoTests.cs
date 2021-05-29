@@ -16,8 +16,9 @@ namespace Eventos.WebApi.Tests.Entities
         {
             var cpfValido = new CPF("55302552051");
             var nascimento = DateTime.Now;
+            var email = new Email("test@teste.com");
 
-            return new Funcionario("João", cpfValido.Cpf, nascimento);
+            return new Funcionario("João", cpfValido.Cpf, nascimento, email.EmailValido);
         }
 
         [Theory]

@@ -15,5 +15,6 @@ namespace Eventos.Application.Queries.Funcionario
 
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
+        public string Email { get; set; }
     }
 }

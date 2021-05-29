@@ -22,6 +22,7 @@ namespace Eventos.Application.Queries.Funcionario
                 Id = funcionario.Id,
                 Nome = funcionario.Nome,
                 Cpf = funcionario.Cpf,
+                Email = funcionario.Email,
                 DataNascimento = funcionario.DataNascimento
             };
         }

@@ -22,14 +22,16 @@ namespace Eventos.Application.Queries.Palestra
             {
                 Palestras = palestra.Select(p => new Palestra
                 {
+                    Id = p.Id,
                     CategoriaId = p.CategoriaId,
                     Tema = p.Tema,
                     Local = p.Local,
                     DataInicio = p.DataInicio,
                     Duracao = p.Duracao,
                     PalestranteId = p.PalestranteId,
-                    Participadores = p.Participantes.Select(pe => new ParticipadoresDto
+                    Participadores = p.Participantes.Select(pe => new ParticipantesResponseDto
                     {
+                        ParticipanteId = pe.Id,
                         FuncionarioId = pe.FuncionarioId,
                         Confirmou = pe.Confirmou
                     }).ToList()

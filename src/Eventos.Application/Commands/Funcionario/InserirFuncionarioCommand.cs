@@ -10,6 +10,9 @@ namespace Eventos.Application.Commands.Funcionario
         [StringLength(50)]
         public string Nome { get; set; }
         [Required]
+        [StringLength(50)]
+        public string Email { get; set; }
+        [Required]
         [StringLength(14)]
         public string Cpf { get; set; }
         [Required]

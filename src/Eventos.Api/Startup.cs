@@ -1,5 +1,7 @@
 using Eventos.Api.Config;
+using Eventos.Api.Filters;
 using Eventos.Infrastructure.Data;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +23,11 @@ namespace Eventos.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(configuration =>
+            {
+                configuration.UseSqlServerStorage(Configuration.GetConnectionString("eventos"));
+            });
+
             services.AddDbContext<DatabaseContext>(opt =>
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("eventos"));
@@ -36,6 +43,20 @@ namespace Eventos.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            UpdateDatabase(app);
+
+            var options = new DashboardOptions
+            {
+                Authorization = new[]
+                {
+                    new HangfireDashboardAuthorizationFilter()
+                }
+            };
+
+            app.UseHangfireDashboard("/hangfire", options);
+
+            app.UseHangfireServer();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -46,12 +67,11 @@ namespace Eventos.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            UpdateDatabase(app);
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

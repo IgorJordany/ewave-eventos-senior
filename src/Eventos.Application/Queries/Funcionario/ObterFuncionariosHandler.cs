@@ -24,7 +24,8 @@ namespace Eventos.Application.Queries.Funcionario
                     Nome = f.Nome,
                     DataNascimento = f.DataNascimento,
                     Cpf = f.Cpf,
-                    Id = f.Id
+                    Id = f.Id,
+                    Email = f.Email
                 })
             };
         }
