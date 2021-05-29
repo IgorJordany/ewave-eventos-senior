@@ -6,12 +6,14 @@ namespace Eventos.Core.Entities
 {
     public class Palestra : Entity
     {
+        public Guid EventoId { get; }
         public Guid CategoriaId { get; }
         public string Tema { get; }
         public string Local { get; }
         public DateTime DataInicio { get; }
         public float Duracao { get; }
         public Guid PalestranteId { get; }
+        public string JobId { get; set; }
         public ICollection<Participante> Participantes { get; } = new HashSet<Participante>();
 
         public Palestra(Guid categoriaId,
@@ -19,7 +21,7 @@ namespace Eventos.Core.Entities
             string local,
             DateTime dataInicio,
             float duracao,
-            Guid palestranteId)
+            Guid palestranteId, Guid eventoId)
         {
             CategoriaId = categoriaId;
             Tema = tema;
@@ -27,6 +29,17 @@ namespace Eventos.Core.Entities
             DataInicio = dataInicio;
             Duracao = duracao;
             PalestranteId = palestranteId;
+            EventoId = eventoId;
+        }
+
+        public void AdicionarJobId(string jobId)
+        {
+            JobId = jobId;
+        }
+
+        public void RemoverJobId()
+        {
+            JobId = null;
         }
 
         public void AdicionarParticipantes(ICollection<Participante> participantes)

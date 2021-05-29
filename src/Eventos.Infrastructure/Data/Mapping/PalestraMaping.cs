@@ -37,6 +37,9 @@ namespace Eventos.Infrastructure.Data.Mapping
             builder.Property(c => c.PalestranteId)
                .HasColumnName("PalestranteId")
                .IsRequired();
+
+            builder.Property(c => c.JobId)
+                .HasColumnName("JobId");
         }
     }
 }

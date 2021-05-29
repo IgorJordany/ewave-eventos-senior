@@ -1,4 +1,5 @@
 using Eventos.Application.Commands.CategoriaPalestra;
+using Eventos.Application.Commands.EmailTest;
 using Eventos.Application.Commands.Evento;
 using Eventos.Application.Commands.Funcionario;
 using Eventos.Application.Commands.Palestra;
@@ -47,6 +48,7 @@ namespace Eventos.Api.Config
 
             //Palestra
             services.AddScoped<InserirPalestraCommandHandler, InserirPalestraCommandHandler>();
+            services.AddScoped<EmailTestCommandHandler, EmailTestCommandHandler>();
 
             //Participante
             services.AddScoped<ConfirmarParticipantesCommandHandler, ConfirmarParticipantesCommandHandler>();

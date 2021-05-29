@@ -11,6 +11,9 @@ namespace Eventos.Application.Commands.Palestra
         public Guid CategoriaId { get; set; }
 
         [Required]
+        public Guid EventoId { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string Tema { get; set; }
 

@@ -10,7 +10,9 @@ namespace Eventos.Core.Entities
         public string Nome { get; }
         public DateTime DataInicio { get; }
         public DateTime DataFim { get; }
+        public string JobId { get; private set; }
         public ICollection<EventoFuncionario> Organizadores { get; } = new HashSet<EventoFuncionario>();
+        public ICollection<Palestra> Palestras { get; } = new HashSet<Palestra>();
 
         public Evento(string nome, DateTime dataInicio, DateTime dataFim)
         {
@@ -32,6 +34,16 @@ namespace Eventos.Core.Entities
             {
                 Organizadores.Add(item);
             }
+        }
+
+        public void AdicionarJobId(string jobId)
+        {
+            JobId = jobId;
+        }
+
+        public void RemoverJobId()
+        {
+            JobId = null;
         }
 
         private bool IsDataValida(DateTime dataInicio, DateTime dataFim)

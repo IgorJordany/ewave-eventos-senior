@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Eventos.Application.Commands.Base;
 using Eventos.Core.Entities;
 using Eventos.Core.Repositories;
+using Eventos.Infrastructure.Interfaces;
+using Hangfire;
 
 namespace Eventos.Application.Commands.Evento
 {
@@ -34,7 +36,7 @@ namespace Eventos.Application.Commands.Evento
 
             var evento = new Core.Entities.Evento(command.Nome, command.DataInicio, command.DataFim);
 
-            var organizadores = new HashSet<EventoFuncionario>(); ;
+            var organizadores = new HashSet<EventoFuncionario>();
 
             foreach (var item in command.Organizadores)
             {
@@ -45,6 +47,11 @@ namespace Eventos.Application.Commands.Evento
             evento.AdicionarOrganizadores(organizadores);
 
             await _eventoRepository.Incluir(evento);
+
+            var jobId = BackgroundJob.Schedule<IEventoService>(
+              s => s.NotificarConfirmacaoPresenta(evento.Id),
+              evento.DataInicio.AddDays(-7)
+            );
 
             return new InserirEventoResponse { EventoId = evento.Id };
         }

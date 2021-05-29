@@ -28,7 +28,7 @@ namespace Eventos.WebApi.Tests.Entities
             var palestrante = FuncionarioGenerator();
             var dataInicio = DateTime.Now.AddDays(1);
 
-            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id);
+            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id, Guid.NewGuid());
 
             using (new AssertionScope())
             {
@@ -50,7 +50,7 @@ namespace Eventos.WebApi.Tests.Entities
             var dataInicio = DateTime.Now.AddDays(1);
             var participantes = new HashSet<Participante>();
 
-            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id);
+            var palestra = new Palestra(categoria.Id, "Análise de sistemas", "Jabuticaba", dataInicio, 2, palestrante.Id, Guid.NewGuid());
 
             for (int i = 0; i < quantParticipantes; i++)
             {

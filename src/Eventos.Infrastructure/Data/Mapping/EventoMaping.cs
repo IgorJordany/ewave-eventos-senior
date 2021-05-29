@@ -24,6 +24,14 @@ namespace Eventos.Infrastructure.Data.Mapping
             builder.Property(c => c.DataFim)
                .HasColumnName("DataFim")
                .IsRequired();
+
+            builder.Property(c => c.JobId)
+                .HasColumnName("JobId");
+
+            builder
+                .HasMany(i => i.Palestras)
+                .WithOne()
+                .HasForeignKey(p => p.EventoId);
         }
     }
 }

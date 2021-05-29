@@ -1,10 +1,11 @@
-﻿using Eventos.Core.Entities;
+﻿using Eventos.Infrastructure.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Eventos.Infrastructure.Interfaces
 {
     public interface ICentralEmailService
     {
-        void EnviarEmailsLocalPalestra(Palestra palestra);
+        void EnviarEmails(List<string> emails, EmailContent content);
     }
 }

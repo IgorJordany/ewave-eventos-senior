@@ -1,6 +1,8 @@
 ﻿using Eventos.Core.Entities;
+using Eventos.Core.Repositories;
 using Eventos.Infrastructure.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -11,80 +13,41 @@ namespace Eventos.Infrastructure.Services
     {
         public CentralEmailService()
         {
-
         }
-        /*
-        public bool EnviarEmails(string email)
+
+        public void EnviarEmails(List<string> emails, EmailContent content)
         {
-            try
+            var smtpClient = new SmtpClient("smtp.gmail.com")
             {
-                // Estancia da Classe de Mensagem
-                MailMessage _mailMessage = new MailMessage();
-                // Remetente
-                _mailMessage.From = new MailAddress("EMAIL DO REMETENTE");
+                Port = 587,
+                Credentials = new NetworkCredential("eventostestesenior@gmail.com", "TrampoTeste"),
+                EnableSsl = true,
+            };
 
-                // Destinatario seta no metodo abaixo
-
-                //Contrói o MailMessage
-                _mailMessage.CC.Add(email);
-                _mailMessage.Subject = "Teste Thiago";
-                _mailMessage.IsBodyHtml = true;
-                _mailMessage.Body = "<b>Olá Tudo bem ??</b><p>Teste Parágrafo</p>";
-
-                //CONFIGURAÇÃO COM PORTA
-                SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32("587"));
-
-                //CONFIGURAÇÃO SEM PORTA
-                // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
-
-                // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
-                _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("EMAIL DO REMETENTE", "SUA SENHA AQUI");
-
-                _smtpClient.EnableSsl = true;
-
-                _smtpClient.SendMailAsync(_mailMessage);
-
-                return true;
-
-            }
-            catch (Exception ex)
+            foreach (var item in emails)
             {
-                throw ex;
-            }
-        }*/
-
-        public void EnviarEmailsLocalPalestra(Palestra palestra)
-        {
-            try
-            {
-                var smtpClient = new SmtpClient("smtp.gmail.com")
+                var mailMessage = new MailMessage
                 {
-                    Port = 587,
-                    Credentials = new NetworkCredential("eventostestesenior@gmail.com", "TrampoTeste"),
-                    EnableSsl = true,
+                    From = new MailAddress("eventostestesenior@gmail.com"),
+                    Subject = content.Subject,
+                    Body = content.Body,
+                    IsBodyHtml = true,
                 };
+                mailMessage.To.Add(item);
 
-                foreach (var item in palestra.Participantes)
-                {
-                    var mailMessage = new MailMessage
-                    {
-                        From = new MailAddress("eventostestesenior@gmail.com"),
-                        Subject = "Lembrete palestra " + palestra.Tema,
-                        Body = "<h1>Hello</h1>",
-                        IsBodyHtml = true,
-                    };
-                    mailMessage.To.Add(item.Funcionario.Email);
-
-                    smtpClient.Send(mailMessage);
-                }
-                
+                smtpClient.SendMailAsync(mailMessage);
             }
-            catch (Exception ex)
-            {
+        }
+    }
+     public class EmailContent
+    {
+        public string Subject { get; }
+        public string Body { get; }
 
-                throw ex;
-            }
+        public EmailContent(string subject, string body)
+        {
+            Subject = subject;
+            Body = body;
         }
     }
 }
