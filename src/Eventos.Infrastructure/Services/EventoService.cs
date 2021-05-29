@@ -27,7 +27,7 @@ namespace Eventos.Infrastructure.Services
 
             emails.AddRange(evento.Organizadores.Select(f => f.Funcionario.Email));
 
-            var content = new EmailContent("<h1>Lembrete Confirmar Presença no evento: " + evento.Nome + "</h1>",
+            var content = new EmailContent("Lembrete Confirmar Presença no evento: " + evento.Nome,
                 "<h1>Lembrete Confirmar Presença no evento: " + evento.Nome + "</h1>" +
                 "<h2>Data/Hora: " + evento.DataInicio + "</h2>");
 

@@ -35,6 +35,8 @@ namespace Eventos.Api.Config
 
             //Services
             services.AddScoped<ICentralEmailService, CentralEmailService>();
+            services.AddScoped<IEventoService, EventoService>();
+            services.AddScoped<IPalestraService, PalestraService>();
 
             //CommandHandlers
             //Funcionario

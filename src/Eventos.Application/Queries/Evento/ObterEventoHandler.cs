@@ -20,6 +20,7 @@ namespace Eventos.Application.Queries.Evento
 
             return new ObterEventoResponse
             {
+                Id = evento.Id,
                 Nome = evento.Nome,
                 DataFim = evento.DataFim,
                 DataInicio = evento.DataInicio,

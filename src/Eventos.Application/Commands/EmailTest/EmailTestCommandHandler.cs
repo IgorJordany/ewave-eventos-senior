@@ -35,12 +35,12 @@ namespace Eventos.Application.Commands.EmailTest
         {
             //var palestra = await _palestraRepository.ObterPalestraPorId(command.PalestraId);
             //_centralEmailService.EnviarEmailsLocalPalestra(palestra);
-
+            /*
             var jobId = BackgroundJob.Enqueue<ICentralEmailService>(
               s => s.EnviarEmailsLocalPalestra(command.PalestraId)
             );
             //BackgroundJob.Delete(notification.JobId);
-
+            */
             return new EmailTestResponse();
         }
     }

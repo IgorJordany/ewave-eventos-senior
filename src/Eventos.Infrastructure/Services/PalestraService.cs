@@ -35,7 +35,7 @@ namespace Eventos.Infrastructure.Services
 
             emails.AddRange(palestra.Participantes.Select(p => p.Funcionario.Email));
 
-            var content = new EmailContent("<h1>Lembrete Palestra: " + palestra.Tema + "</h1>",
+            var content = new EmailContent("Lembrete Palestra: " + palestra.Tema,
                 "<h1>Lembrete Palestra: " + palestra.Tema + "</h1>" +
                 "<h2>Data/Hora: " + palestra.DataInicio + "</h2>" +
                 "<h2>Local: " + palestra.Local + "</h2>");

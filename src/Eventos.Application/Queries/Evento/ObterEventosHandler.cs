@@ -22,6 +22,7 @@ namespace Eventos.Application.Queries.Evento
             {
                 Eventos = eventos.Select(e => new Evento
                 {
+                    Id = e.Id,
                     Nome = e.Nome,
                     DataFim = e.DataFim,
                     DataInicio = e.DataInicio,
